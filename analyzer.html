@@ -1,0 +1,162 @@
+<! doctype html>
+<html>
+<head>
+    
+    <!-- jquery -->
+    <script type="application/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+    <!-- jquery ui -->
+    <link type="text/css" rel="stylesheet" href="https://code.jquery.com/ui/1.12.0-beta.1/themes/smoothness/jquery-ui.css" />
+    <script type="application/javascript" src="https://code.jquery.com/ui/1.12.0-beta.1/jquery-ui.min.js"></script>
+    
+    <!-- bootstrap -->
+
+    <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script type="application/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    
+
+    <!-- d3js/NVD3js-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.5/nv.d3.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.5/nv.d3.min.js"></script>
+
+<!-- semanticUI -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css">
+
+    <!-- custom -->
+    <link type="text/css" href="main.css" rel="stylesheet" />
+    <script type="application/javascript" src="analyzer.js"></script>
+    
+</head>
+    
+    
+    <body>
+    
+        <textarea id="txtData" class="form-control" ></textarea>
+
+        <fieldset>
+            <legend>Configuration</legend>
+            <div class=row-fluid>
+               <!-- <label><input type="checkbox" id="cb_CombineCase" data-ctrl="combine-case"> combine case </label>
+               <label><input type="checkbox" id="cb_onlyAlpha" data-ctrl="only-alpha" checked="checked"> only alphabets</label> -->
+               <div class="ui toggle checkbox" id="cb_CombineCase" onChange="updateConfiguration()">
+                <input name="public" type="checkbox"><label>combine case</label>
+               </div>
+
+               <div class="ui toggle checkbox" id="cb_OnlyAlpha" onChange="updateConfiguration()">
+                <input name="public" type="checkbox"><label>only alphabets</label>
+               </div>
+
+            </div>
+        </fieldset>
+
+        <button id="btnAnalyze" class="btn btn-success" onclick="analyze(event)">Analyze</button>
+        
+        <!-- analysis -->
+<div class="row-fluid">
+
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          <!-- word analysis -->
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+              <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                 Words Analysis
+                </a>
+              </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+              <div class="panel-body">
+                
+                <!-- word count-->
+                <div id="divWordCount" class="divWordCount">
+
+                </div>
+
+              </div>
+            </div>
+        </div>
+
+          <!-- charecter analysis-->
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne1">
+              <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne1" aria-expanded="true" aria-controls="collapseOne">
+                 Charecters Analysis
+                </a>
+              </h4>
+            </div>
+            <div id="collapseOne1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne1">
+             
+              <div id="divFrequencySort">
+                <div class="ui floating dropdown labeled search icon button">
+                  <i class="filter icon"></i>
+                  <span class="text">Sort by</span>
+                  <div class="menu">
+                    <div class="item">high to low</div>
+                    <div class="item">low to high</div>
+                    <div class="item">alphabetical order</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel-body">
+                 <!-- word count-->
+                <div id="divCharCount" class="divCharCount">
+                </div>
+                <!-- word frequency graph -->
+                <div id="divCharFreqGraph">
+                    <svg></svg>
+                </div>
+
+              </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+  $("#divFrequencySort div.ui.dropdown").dropdown({
+    onChange:function  (value,text,$selectItem) {
+      
+      var data=window.analyzer.data["chars"];
+      var finalData=[];
+
+      if(value=="low to high"){
+        finalData=data.sort(function(a,b){ return (a.count==b.count)?0:(a.count<b.count)?-1:1 });
+      }
+
+      else if(value=="high to low"){
+        finalData=data.sort(function(a,b){ return (a.count==b.count)?0:(a.count<b.count)?1:-1 });
+      }
+
+      else if(value=="alphabetical order"){
+        finalData=data.sort(function(a,b){
+          var aCode=String.charCodeAt(a.value);
+          var bCode=String.charCodeAt(b.value);
+
+          return (aCode==bCode)?0:(aCode<bCode)?-1:1;
+        })
+
+      }
+      
+      bind_CharecterCount(finalData);
+      draw_CharecterFrequency(finalData);
+    }
+
+  });
+
+})
+
+</script>
+    </body>
+    
+</html>

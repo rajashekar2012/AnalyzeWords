@@ -1,0 +1,23 @@
+#txtData{
+width: 640px;
+height:250px;
+}
+
+/*word cound li*/
+.divWordCount,.divCharCount{
+	max-height:250px;
+	overflow-y:auto;
+}
+
+.divWordCount .ui.label{
+	    margin: 5px;
+}
+
+.divCharCount .ui.blue.label, .divCharCount .ui.blue.labels .label{
+    background-color: #21d087!important;
+    font-size: 14px;
+}
+
+#divCharFreqGraph svg{
+	height: 250px;
+}
