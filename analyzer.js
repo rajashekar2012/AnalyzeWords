@@ -35,6 +35,8 @@ window.analyzer=window.analyzer||{};
 $(function(){
 
     $("#cb_OnlyAlpha").checkbox("check");
+    $("#cb_CombineCase").checkbox("check");
+    
     updateConfiguration();
 })
 
@@ -49,6 +51,12 @@ function updateConfiguration () {
     }
 }
 function analyze (e) {
+    
+    //check if text entered 
+    if(document.getElementById("txtData").value==""){
+        alert("place your text and click on analyze (:)");
+        return;
+    }
     
     cleanOld();
     
@@ -172,8 +180,6 @@ function bind_CharecterCount (data) {
 
 function draw_CharecterFrequency (data) {
     
-    debugger;
-
     var graphData=[{
         key:"charecter frequency",
         values:data
