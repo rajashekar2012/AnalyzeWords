@@ -32,36 +32,46 @@
     
     
     <body>
-    
-        <textarea id="txtData" class="form-control" ></textarea>
-
-        <fieldset>
-            <legend>Configuration</legend>
-            <div class=row-fluid>
-               <!-- <label><input type="checkbox" id="cb_CombineCase" data-ctrl="combine-case"> combine case </label>
-               <label><input type="checkbox" id="cb_onlyAlpha" data-ctrl="only-alpha" checked="checked"> only alphabets</label> -->
-               <div class="ui toggle checkbox" id="cb_CombineCase" onChange="updateConfiguration()">
-                <input name="public" type="checkbox"><label>combine case</label>
-               </div>
-
-               <div class="ui toggle checkbox" id="cb_OnlyAlpha" onChange="updateConfiguration()">
-                <input name="public" type="checkbox"><label>only alphabets</label>
-               </div>
-
+        
+        <div class="row" style="margin-top:10px">
+            
+            <div class="col-md-3">
+                <fieldset>
+                    <legend>Configuration</legend>
+                    <div class=row-fluid>
+                        <!-- <label><input type="checkbox" id="cb_CombineCase" data-ctrl="combine-case"> combine case </label>
+                        <label><input type="checkbox" id="cb_onlyAlpha" data-ctrl="only-alpha" checked="checked"> only alphabets</label> -->
+                        <div class="ui toggle checkbox" id="cb_CombineCase" onChange="updateConfiguration()">
+                            <input name="public" type="checkbox"><label>combine case</label>
+                        </div>
+                        
+                        <div class="ui toggle checkbox" id="cb_OnlyAlpha" onChange="updateConfiguration()">
+                            <input name="public" type="checkbox"><label>only alphabets</label>
+                        </div>
+                        
+                    </div>
+                </fieldset>
+                <div class="btnAnalyze">
+                    <button id="btnAnalyze" class="positive ui button" onclick="analyze(event)">  <i class="Settings icon"></i> Analyze</button>
+                </div>
             </div>
-        </fieldset>
-
-        <button id="btnAnalyze" class="btn btn-success" onclick="analyze(event)">Analyze</button>
+            <div class="col-md-8">
+                <textarea id="txtData" class="form-control"  placeholder="enter your text"></textarea>
+            </div>
+        </div>
+        
+        
+        
         
         <!-- analysis -->
-<div class="row-fluid">
-
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+<div class="row-fluid" style="margin-top:50px">
+    
+    <div class="panel-group col-md-12" id="accordion" role="tablist" aria-multiselectable="true">
           <!-- word analysis -->
         <div class="panel panel-default">
             <div class="panel-heading" role="tab" id="headingOne">
               <h4 class="panel-title">
-                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <a>
                  Words Analysis
                 </a>
               </h4>
@@ -77,19 +87,14 @@
               </div>
             </div>
         </div>
-
+        
           <!-- charecter analysis-->
         <div class="panel panel-default">
             <div class="panel-heading" role="tab" id="headingOne1">
-              <h4 class="panel-title">
-                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne1" aria-expanded="true" aria-controls="collapseOne">
-                 Charecters Analysis
-                </a>
+              <h4 class="panel-title" style="display:inline-block">
+                <a>Charecters Analysis</a>
               </h4>
-            </div>
-            <div id="collapseOne1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne1">
-             
-              <div id="divFrequencySort">
+              <div id="divFrequencySort" class="pull-right">
                 <div class="ui floating dropdown labeled search icon button">
                   <i class="filter icon"></i>
                   <span class="text">Sort by</span>
@@ -100,6 +105,8 @@
                   </div>
                 </div>
               </div>
+            </div>
+            <div id="collapseOne1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne1">
 
               <div class="panel-body">
                  <!-- word count-->
@@ -116,7 +123,7 @@
         </div>
 
     </div>
-
+    
 </div>
 
 
