@@ -217,7 +217,7 @@ function isAlpha (ch) {
     var charcode;
 
     if(ch){
-        charcode = String.charCodeAt(ch);
+        charcode = ch.charCodeAt(0);
         if((charcode>=65 && charcode<=90)||(charcode>=97 && charcode<=122))
             isChar=true;
     }
