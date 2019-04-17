@@ -226,8 +226,6 @@ function draw_CharecterFrequency (data) {
 
 
 function showSelectChar (el) {
-    debugger;
-
     $(el).popup('show')
 }
 //:>> --------------------------- utils function  ------------------------------------------
